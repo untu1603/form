@@ -6,7 +6,9 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity @Data
+@Entity
+@Data
+@Table(name = "answer")
 public class Answer {
 
     @Id
