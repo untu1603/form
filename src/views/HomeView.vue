@@ -1,19 +1,18 @@
 <script setup>
-</script>
 
+</script>
 <template>
   <div>
     <b-navbar  type="dark" variant="light" fixed="top">
         <b-navbar-brand href="#">
           <img src="https://cdn-icons-png.flaticon.com/256/5968/5968528.png" width="30">
-                NavBar
+           Form
         </b-navbar-brand>
-        <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        <b-nav-form class="w-50">
+          <b-form-input size="lg"  placeholder="Search"></b-form-input>
         </b-nav-form>
       <b-navbar-nav>
-          <b-nav-item-dropdown right text="dfd">
+          <b-nav-item-dropdown right >
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
