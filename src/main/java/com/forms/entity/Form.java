@@ -21,6 +21,8 @@ public class Form {
 
     @Column(name = "user_id", nullable = false)
     private UUID userId;
+    @Column(name = "header")
+    private String header;
 
     @Column(name = "screen_shot")
     private String screenShot;

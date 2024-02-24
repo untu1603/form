@@ -8,5 +8,7 @@ import java.util.UUID;
 public interface FormService {
     List<Form> getAllByUserId(UUID userId);
 
+    Form getId(UUID formId);
+
     Form create(Form form);
 }

@@ -19,6 +19,11 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
+    public Form getId(UUID formId) {
+        return formRepository.findById(formId).get();
+    }
+
+    @Override
     public Form create(Form form) {
         return formRepository.save(form);
     }
