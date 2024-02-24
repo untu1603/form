@@ -2,7 +2,6 @@
 
 </script>
 <template>
-  <div>
     <b-navbar  type="dark" variant="light" fixed="top">
         <b-navbar-brand href="#">
           <img src="https://cdn-icons-png.flaticon.com/256/5968/5968528.png" width="30">
@@ -18,6 +17,7 @@
           </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>
-  </div>
-
 </template>
+<style>
+
+</style>

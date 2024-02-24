@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
 import {ref} from "vue";
-
+import {FormModel} from "@/models/FormModel.js";
 export const formStore = defineStore(
     {
-        id: 'form',
+        id: 'formEdit',
         state: () => ({
-            formId: ref(null)
+            form: ref(FormModel)
         }),
         actions: {
-
+            setForm(form){
+                this.form = form
+            }
         }
     })
