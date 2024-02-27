@@ -38,13 +38,14 @@ public class FormController {
         log.info("Dfaa");
         return formService.getId(id);
     }
-    @PostMapping("/create")
+    @PostMapping("")
     @Operation(summary = "Search")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Search", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Form.class)) }),
             @ApiResponse(responseCode = "400", description = "Invalid data", content = @Content)})
     public Form creat(@RequestBody Form form)
     {
+        log.info("dfsdaf"+form.toString());
         return formService.create(form);
     }
 }
