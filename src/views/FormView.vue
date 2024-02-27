@@ -6,10 +6,11 @@ import {RepositoryFactory} from "@/api/RepositoryFactory.js";
 import {ref} from "vue";
 import {QuestionModel} from "@/models/FormModel.js";
 import {ArrowPathIcon, PlusIcon} from "@heroicons/vue/24/outline/index.js";
+import QuestionView from "@/components/QuestionView.vue";
 
 
 export default {
-  components: {ArrowPathIcon, Question, Navbar, PlusIcon},
+  components: {QuestionView, ArrowPathIcon, Question, Navbar, PlusIcon},
   setup() {
     const storeForm = formStore()
     const FormsRepository = RepositoryFactory.get('forms')
@@ -19,36 +20,30 @@ export default {
       storeForm.form=response.data
       listQuestion.value =storeForm.form.questions
     }
-    async function saveForm() {
-      await FormsRepository.createForm(storeForm.form)
-    }
-    return { storeForm,getForm,listQuestion,saveForm}
+    return { storeForm,getForm,listQuestion,}
   },
   created() {
     if (this.storeForm.form.value == null ) {
-      const id = this.$route.params.id;
+      const id = '44f54e46-a322-4550-bed7-7e273f8b3fae';
       this.getForm(id)
     }
   },
 }
 </script>
 <template>
-<Navbar></Navbar>
+  <Navbar></Navbar>
   <body>
   <div id="home" >
-  <main class="container ">
-    <div  class="cardquest">
-      <input class="form-control fs-2" v-model="storeForm.form.header" >
-      <textarea class="w-50 mt-1 rounded form-control fs-4"  v-model="storeForm.form.description"></textarea>
-    </div>
-  <div v-for="(question,index) in listQuestion"  class="cardquest">
-    <Question :index="index" ></Question>
-  </div>
-    <plus-icon class="icon"/>
-    <div class="d-flex flex-row-reverse">
-      <b-button @click="saveForm" variant="danger" class="">Save</b-button>
-    </div>
-  </main>
+    <main class="container ">
+      <div  class="cardquest">
+        <h1> {{ storeForm.form.header }}</h1>
+        <p> {{storeForm.form.description}}</p>
+      </div>
+      <div v-for="(question,index) in listQuestion" :key="question.content" class="cardquest">
+        <QuestionView :index="index" ></QuestionView>
+      </div>
+      <plus-icon class="icon"/>
+    </main>
   </div>
   </body>
 </template>

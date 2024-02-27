@@ -46,8 +46,13 @@ div#home {
         &:hover {
             transform: scale(1.01);
         }
-        .question {
-
-        }
     }
+}
+.icon
+{
+    width: 25px;
+    height: 25px;
+}
+.icon:hover {
+    background-color: #a8a8a8;
 }

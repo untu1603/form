@@ -2,7 +2,7 @@
   <b-form >
     <div class="row">
       <div class="col">
-        <textarea class="form-control" v-model="content"></textarea>
+        <textarea class="form-control" v-model="question.content"></textarea>
       </div>
       <div class="col-3">
         <b-form-select
@@ -13,32 +13,39 @@
     </div>
     <b-form-group  label="Question:" v-if="question.type == 1">
       <div v-for="(choice,index) in question.choices" >
-      <b-form-input
-          class="form-control form-control-sm"
+        <div class="d-inline-flex w-50 mt-2">
+          <stop-icon class="icon"/>
+        <b-form-input
+          class="form-control-sm"
           placeholder="Option"
           v-model="question.choices[index]"
           required
-      ></b-form-input>
+        ></b-form-input>
+        <x-mark-icon  class="icon" @click="onDeleteChoice(index)"/>
+        </div>
       </div>
-      <b-button @click="createChoice" variant="primary">+</b-button>
+      <plus-icon @click="createChoice" class="icon"/>
     </b-form-group>
-    <b-button @click="onDelete" variant="primary">Delete</b-button>
-    <b-button @click="onReset" variant="danger">Reset</b-button>
+    <trash-icon @click="onDelete" class="icon"/>
+    <arrow-path-icon @click="onReset" class="icon"/>
   </b-form>
 
 </template>
 
 <script>
-import { ref} from 'vue';
+import {reactive, ref} from 'vue';
 import {formStore} from "@/stores/form.js";
+import { TrashIcon, ArrowPathIcon, XMarkIcon, StopIcon,PlusIcon} from '@heroicons/vue/24/outline';
+
 export default {
   props: {
     index: Number
   },
+  components: { TrashIcon, ArrowPathIcon ,XMarkIcon, StopIcon, PlusIcon},
   setup(props) {
     const storeForm = formStore()
     const question = storeForm.form.questions[props.index]
-    const content= question.content
+
     const types = ref([
       { value: 1, text: 'Multiple choice' },
       { value: 2, text: 'Paragraph' },
@@ -49,9 +56,12 @@ export default {
     const onDelete = () => {
       storeForm.form.questions.splice(props.index,1)
     };
+    const onDeleteChoice = (id) => {
+      question.choices.splice(id,1)
+    };
     const onReset = () => {
     };
-    return {content ,storeForm, types, onDelete, onReset, question,createChoice };
+    return {storeForm, types, onDelete, onReset, question,createChoice,onDeleteChoice };
   },
 
 };

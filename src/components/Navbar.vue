@@ -1,6 +1,6 @@
 <script setup>
 import {formStore} from "@/stores/form.js";
-
+import {EyeIcon} from "@heroicons/vue/24/solid/index.js";
 </script>
 <template>
     <b-navbar  type="dark" variant="light" fixed="top">
@@ -13,6 +13,9 @@ import {formStore} from "@/stores/form.js";
         <b-nav-form class="w-50">
           <b-form-input size="lg"  placeholder="Search" v-model=formStore().search></b-form-input>
         </b-nav-form>
+      <router-link to="/view" class="text-secondary" >
+        <eye-icon class="icon "></eye-icon>
+        </router-link>
       <b-navbar-nav>
           <b-nav-item-dropdown right >
             <b-dropdown-item href="#">Profile</b-dropdown-item>
