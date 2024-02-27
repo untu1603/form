@@ -1,26 +1,26 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import {RepositoryFactory} from "@/api/RepositoryFactory.js";
-import {ref} from "vue";
+import { ref} from "vue";
 import {FormModel} from "@/models/FormModel.js";
-import Question from "@/components/Question.vue";
 import {formStore} from "@/stores/form.js";
 export default {
-  components: {Navbar,Question},
+  components: {Navbar},
   setup() {
     const FormsRepository = RepositoryFactory.get('forms')
-    const abc = ref(Array < FormModel > ([]));
+    const listForm = ref(Array<FormModel>([]));
     const storeForm = formStore()
     async function getAll() {
       const response = await FormsRepository.getAll()
-      abc.value = response.data
-      console.log(abc.value)
-
+      listForm.value = response.data
     }
     const createUrlForm = (formId) =>{
         return `\edit/${formId}`
     }
-    return {abc, getAll, storeForm, createUrlForm}
+    const showForm = (form) =>{
+      return form.header.toLowerCase().includes(storeForm.search.toLowerCase())
+    }
+    return {listForm, getAll, storeForm, createUrlForm,showForm}
   },
   created() {
     this.getAll()
@@ -36,17 +36,16 @@ export default {
       </svg>
     </b-button>
     <div class="wrapper">
-      <li class="card" v-for="form in abc" >
-        <router-link class="no-underline" :to=createUrlForm(form.formId) @click="storeForm.setForm(form)">
+      <div class="card" v-for="form in listForm" v-show=showForm(form)>
+        <router-link class="no-underline" :to=createUrlForm(form.formId) @click="storeForm.form=form">
         <a>
         <img v-bind:src="form.screenShot"/>
         {{ form.header }}
         </a>
         </router-link>
-      </li>
+      </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>

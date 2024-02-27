@@ -5,11 +5,10 @@ export const formStore = defineStore(
     {
         id: 'formEdit',
         state: () => ({
-            form: ref(FormModel)
+            form: ref(FormModel),
+            search: ""
         }),
         actions: {
-            setForm(form){
-                this.form = form
-            }
         }
     })
+

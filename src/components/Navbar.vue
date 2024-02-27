@@ -1,14 +1,17 @@
 <script setup>
+import {formStore} from "@/stores/form.js";
 
 </script>
 <template>
     <b-navbar  type="dark" variant="light" fixed="top">
-        <b-navbar-brand href="#">
+      <b-navbar-brand>
+        <router-link to="/" style="text-decoration: none; color: inherit;">
           <img src="https://cdn-icons-png.flaticon.com/256/5968/5968528.png" width="30">
            Form
+        </router-link>
         </b-navbar-brand>
         <b-nav-form class="w-50">
-          <b-form-input size="lg"  placeholder="Search"></b-form-input>
+          <b-form-input size="lg"  placeholder="Search" v-model=formStore().search></b-form-input>
         </b-nav-form>
       <b-navbar-nav>
           <b-nav-item-dropdown right >

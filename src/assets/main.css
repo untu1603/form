@@ -1,6 +1,6 @@
 @import './base.css';
 div#home {
-    padding-top: 50px;
+    padding-top: 80px;
     .card-create {
         box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
         width: 124px;
@@ -13,30 +13,41 @@ div#home {
     }
     .wrapper {
         display: flex;
-        max-width: 44400px;
         flex-wrap: wrap;
-
     }
     .card {
         box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-        max-width: 124px;
+        max-width: 180px;
+        max-height: 260px;
         margin: 12px;
         transition: .15s all ease-in-out;
         &:hover {
             transform: scale(1.1);
         }
         a {
-            padding: 12px;
+            margin: 12px;
             color: #000000;
-            font-size: 24px;
+            font-size: 18px;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
             align-items: center;
-
             img {
-                height: 100px;
+                height: 120px;
             }
         }
     }
+    .cardquest {
+        box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+        margin: 12px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 12px;
+        &:hover {
+            transform: scale(1.01);
+        }
+        .question {
 
+        }
+    }
 }

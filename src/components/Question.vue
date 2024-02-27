@@ -1,76 +1,59 @@
 <template>
-  <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+  <b-form >
     <div class="row">
       <div class="col">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" v-model="content"></textarea>
       </div>
       <div class="col-3">
         <b-form-select
-            v-model="form.food"
-            :options="foods"
-            required
+            v-model="question.type"
+            :options="types"
         ></b-form-select>
       </div>
     </div>
-    <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+    <b-form-group  label="Question:" v-if="question.type == 1">
+      <div v-for="(choice,index) in question.choices" >
       <b-form-input
           class="form-control form-control-sm"
-          id="input-2"
-          v-model="form.name"
-          placeholder="Enter name"
+          placeholder="Option"
+          v-model="question.choices[index]"
           required
       ></b-form-input>
-      <b-button type="create" variant="primary">+</b-button>
+      </div>
+      <b-button @click="createChoice" variant="primary">+</b-button>
     </b-form-group>
-    <b-button type="submit" variant="primary">Submit</b-button>
-    <b-button  type="reset" variant="danger">Reset</b-button>
+    <b-button @click="onDelete" variant="primary">Delete</b-button>
+    <b-button @click="onReset" variant="danger">Reset</b-button>
   </b-form>
 
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref} from 'vue';
+import {formStore} from "@/stores/form.js";
 export default {
-  setup() {
-    const form = ref({
-      email: '',
-      name: '',
-      food: null,
-    });
-
-    const foods = ref([
-      { text: 'Select One', value: null },
-      'Carrots',
-      'Beans',
-      'Tomatoes',
-      'Corn',
-    ]);
-
-    const show = ref(true);
-
-    const onSubmit = () => {
-      alert(JSON.stringify(form.value));
-    };
-
-    const onReset = () => {
-      form.value.email = '';
-      form.value.name = '';
-      form.value.food = null;
-
-      // Reset browser validation state
-      show.value = false;
-      setTimeout(() => {
-        show.value = true;
-      }, 0); // Use 0 for immediate update
-    };
-
-    return { form, foods, show, onSubmit, onReset };
+  props: {
+    index: Number
   },
+  setup(props) {
+    const storeForm = formStore()
+    const question = storeForm.form.questions[props.index]
+    const content= question.content
+    const types = ref([
+      { value: 1, text: 'Multiple choice' },
+      { value: 2, text: 'Paragraph' },
+    ]);
+    const createChoice = () => {
+      question.choices.push('')
+    };
+    const onDelete = () => {
+      storeForm.form.questions.splice(props.index,1)
+    };
+    const onReset = () => {
+    };
+    return {content ,storeForm, types, onDelete, onReset, question,createChoice };
+  },
+
 };
 </script>
 
-<style>
-html, body {
-  margin: 2% 2% 2% 2%;
-}
-</style>
