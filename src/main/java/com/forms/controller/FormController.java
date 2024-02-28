@@ -20,32 +20,26 @@ import java.util.UUID;
 public class FormController {
     private final FormService formService;
     @GetMapping("")
-    @Operation(summary = "Search")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Search", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Form.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid data", content = @Content)})
     public List<Form> getAll()
     {
         return formService.getAllByUserId(UUID.fromString("3fa85f64-5717-4562-b3fc-2c963f66afa6"));
     }
     @GetMapping("/{id}")
-    @Operation(summary = "Search")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Search", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Form.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid data", content = @Content)})
     public Form getId(@PathVariable(value = "id") UUID id)
     {
-        log.info("Dfaa");
         return formService.getId(id);
     }
     @PostMapping("")
-    @Operation(summary = "Search")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Search", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Form.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid data", content = @Content)})
     public Form creat(@RequestBody Form form)
     {
         log.info("dfsdaf"+form.toString());
         return formService.create(form);
+    }
+    @PutMapping("/{id}")
+    public Form update(@PathVariable(value = "id") UUID id,@RequestBody Form form)
+    {
+        log.info("dfsdaf"+form.toString());
+        form.setFormId(id);
+        return formService.update(form);
     }
 }

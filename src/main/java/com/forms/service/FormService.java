@@ -11,4 +11,6 @@ public interface FormService {
     Form getId(UUID formId);
 
     Form create(Form form);
+
+    Form update(Form form);
 }

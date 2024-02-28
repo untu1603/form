@@ -37,7 +37,7 @@ public class Form {
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
 
-    @Column(name = "last_updated_time")
+    @Column(name = "last_updated_time", nullable = false)
     private LocalDateTime lastUpdatedTime;
 
 }

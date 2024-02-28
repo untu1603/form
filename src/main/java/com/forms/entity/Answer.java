@@ -1,7 +1,9 @@
 package com.forms.entity;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -21,9 +23,9 @@ public class Answer {
 
     @Column(name = "user_id", nullable = false)
     private UUID userId;
-
+    @Type(JsonType.class)
     @Column(name = "contents", columnDefinition = "json", nullable = false)
-    private String contents;
+    private ContentAnswer contents;
 
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
