@@ -3,35 +3,36 @@ import {formStore} from "@/stores/form.js";
 import Question from "@/components/Question.vue";
 import Navbar from "@/components/Navbar.vue";
 import {RepositoryFactory} from "@/api/RepositoryFactory.js";
-import { QuestionClass, } from "@/models/FormModel.js";
+import {ref} from "vue";
+import {FormClass, QuestionClass, QuestionModel} from "@/models/FormModel.js";
 import { PlusIcon} from "@heroicons/vue/24/outline/index.js";
-import {useRoute} from "vue-router";
 
 
 export default {
   components: { Question, Navbar, PlusIcon},
   setup() {
-    const  route  = useRoute();
     const storeForm = formStore()
     const FormsRepository = RepositoryFactory.get('forms')
-    const openStatistic = () => route.params.tab != 'statistic' ? true : false;
-
     async function getForm(id) {
       const response = await FormsRepository.getForm(id)
       storeForm.form=response.data
     }
-    async function updateForm() {
-      await FormsRepository.updateForm(storeForm.form.formId,storeForm.form)
+    async function saveForm() {
+      const response= await FormsRepository.createForm(storeForm.form)
+      storeForm.form=response.data
     }
     const createQuestion = () => {
       storeForm.form.questions.push(new QuestionClass(1))
-    };
-    return { storeForm,getForm,updateForm,createQuestion,openStatistic}
+    }
+    const createUrlForm = (formId) =>{
+      return `edit/${formId}`
+    }
+    return {createUrlForm, storeForm,getForm,saveForm,createQuestion}
   },
+
   created() {
-    const id = this.$route.params.id;
       if (this.storeForm.form.formId == null) {
-        this.getForm(id)
+        this.storeForm.form = new FormClass("header")
       }
   },
 }
@@ -40,7 +41,7 @@ export default {
 <Navbar></Navbar>
   <body>
   <div id="home" >
-  <main class="container " v-if="openStatistic()">
+  <main class="container ">
     <div  class="cardquest">
       <input class="form-control fs-2" v-model="this.storeForm.form.header" >
       <textarea class="w-50 mt-1 rounded form-control fs-4"  v-model="storeForm.form.description"></textarea>
@@ -50,7 +51,9 @@ export default {
   </div>
     <plus-icon @click="createQuestion" class="icon"/>
     <div class="d-flex flex-row-reverse">
-      <b-button @click="updateForm" variant="danger" class="">Save</b-button>
+      <router-link :to=createUrlForm(storeForm.form.formId)>
+      <b-button @click="saveForm" variant="danger" class="">Save</b-button>
+      </router-link>
     </div>
   </main>
   </div>

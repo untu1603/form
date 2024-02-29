@@ -11,7 +11,7 @@
         ></b-form-select>
       </div>
     </div>
-    <b-form-group  label="Question:" v-if="question.type == 1">
+    <b-form-group  label="Question:" v-if="question.type != 3">
       <div v-for="(choice,index) in question.choices" >
         <div class="d-inline-flex w-50 mt-2">
           <stop-icon class="icon"/>
@@ -29,11 +29,10 @@
     <trash-icon @click="onDelete" class="icon"/>
     <arrow-path-icon @click="onReset" class="icon"/>
   </b-form>
-
 </template>
 
 <script>
-import {reactive, ref} from 'vue';
+import { ref} from 'vue';
 import {formStore} from "@/stores/form.js";
 import { TrashIcon, ArrowPathIcon, XMarkIcon, StopIcon,PlusIcon} from '@heroicons/vue/24/outline';
 
@@ -48,7 +47,8 @@ export default {
 
     const types = ref([
       { value: 1, text: 'Multiple choice' },
-      { value: 2, text: 'Paragraph' },
+      { value: 2, text: 'Checkboxes' },
+      { value: 3, text: 'Paragraph' },
     ]);
     const createChoice = () => {
       question.choices.push('')
