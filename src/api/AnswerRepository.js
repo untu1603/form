@@ -19,6 +19,9 @@ export default {
         return Repository.put(`${resource}/${answerId}`,payload)
     },
 
+    statistic(formId){
+        return Repository.get(`${resource}/statistic/${formId}`)
+    },
     delete(answerId){
         return Repository.delete(`${resource}/${answerId}`)
     }

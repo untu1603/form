@@ -3,8 +3,7 @@ import {formStore} from "@/stores/form.js";
 import Question from "@/components/Question.vue";
 import Navbar from "@/components/Navbar.vue";
 import {RepositoryFactory} from "@/api/RepositoryFactory.js";
-import {ref} from "vue";
-import {FormClass, QuestionClass, QuestionModel} from "@/models/FormModel.js";
+import {FormClass, QuestionClass,} from "@/models/FormModel.js";
 import { PlusIcon} from "@heroicons/vue/24/outline/index.js";
 
 
@@ -46,9 +45,9 @@ export default {
       <input class="form-control fs-2" v-model="this.storeForm.form.header" >
       <textarea class="w-50 mt-1 rounded form-control fs-4"  v-model="storeForm.form.description"></textarea>
     </div>
-  <div v-for="(question,index) in storeForm.form.questions"  class="cardquest">
+    <div v-for="(question,index) in storeForm.form.questions"  class="cardquest">
     <Question :index="index" ></Question>
-  </div>
+    </div>
     <plus-icon @click="createQuestion" class="icon"/>
     <div class="d-flex flex-row-reverse">
       <router-link :to=createUrlForm(storeForm.form.formId)>
