@@ -37,4 +37,9 @@ public class FormServiceImpl implements FormService {
         form.setLastUpdatedTime(LocalDateTime.now());
         return formRepository.save(form);
     }
+
+    @Override
+    public void delete(UUID formId) {
+        formRepository.deleteById(formId);
+    }
 }

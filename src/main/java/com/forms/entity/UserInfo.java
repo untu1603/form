@@ -5,12 +5,10 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 @Entity
 @Data
-@Table(name = "user")
-public class User {
-
+@Table(name = "user_info")
+public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id", nullable = false)
@@ -21,5 +19,4 @@ public class User {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
-
 }

@@ -1,9 +1,9 @@
 package com.forms.repository;
 
-import com.forms.entity.User;
+import com.forms.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserInfoRepository extends JpaRepository<UserInfo, UUID> {
 }

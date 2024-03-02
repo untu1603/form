@@ -13,4 +13,6 @@ public interface FormService {
     Form create(Form form);
 
     Form update(Form form);
+
+    void delete(UUID formId);
 }

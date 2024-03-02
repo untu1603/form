@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,7 +26,7 @@ public class Answer {
     private UUID userId;
     @Type(JsonType.class)
     @Column(name = "contents", columnDefinition = "json", nullable = false)
-    private ContentAnswer contents;
+    private List<ContentAnswer> contents;
 
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
