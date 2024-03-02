@@ -34,6 +34,7 @@ div#home {
             align-items: center;
             img {
                 height: 120px;
+                width: 120px;
             }
         }
     }

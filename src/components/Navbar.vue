@@ -18,7 +18,7 @@ const linkShare = () => {
         </router-link>
         </b-navbar-brand>
         <b-nav-form class="w-50">
-          <b-form-input v-if="view('listForm')" size="lg"  placeholder="Search" v-model=formStore().search></b-form-input>
+          <b-form-input v-if="view('listForm')" size="lg"  placeholder="Search" v-model=formStore().search class="ms-5"></b-form-input>
         </b-nav-form>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav v-if="view('formEdit') || view('formEditTab')">

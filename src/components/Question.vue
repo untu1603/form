@@ -29,7 +29,7 @@
     <b-form-group v-else >
       <div>
         <div class="d-inline-flex w-50 mt-2">
-          <input type="checkbox" v-model="isRegE">
+          <input type="checkbox" v-model="isRegE" @change="disableRegE">
           <b-form-input :disabled = !isRegE
               class="form-control-sm "
               placeholder="Regex Expression"
@@ -40,7 +40,7 @@
       </div>
       <div>
         <div class="d-inline-flex w-50 mt-2">
-          <input type="checkbox" v-model="isSize">
+          <input type="checkbox" v-model="isSize" @change="disableSize">
           <label class="mx-2">Size</label>
           <b-form-input :disabled = !isSize
                         class="form-control-sm"
@@ -62,7 +62,6 @@ import { TrashIcon, ArrowPathIcon, XMarkIcon, StopIcon,PlusIcon} from '@heroicon
 import {isRegExp} from "eslint-plugin-vue/lib/utils/regexp.js";
 
 export default {
-  methods: {isRegExp},
   props: {
     index: Number
   },
@@ -72,6 +71,8 @@ export default {
     const question = storeForm.form.questions[props.index]
     const isRegE =ref(false)
     const isSize =ref(false)
+    function disableRegE (){ question.regexExpression= null}
+    function disableSize (){ question.size= null}
     const types = ref([
       { value: 1, text: 'Multiple choice' },
       { value: 2, text: 'Checkboxes' },
@@ -88,7 +89,7 @@ export default {
     };
     const onReset = () => {
     };
-    return {storeForm, types, onDelete, onReset, question,createChoice,onDeleteChoice ,isRegE,isSize};
+    return {storeForm, types, onDelete, onReset, question,createChoice,onDeleteChoice ,isRegE,isSize,disableSize,disableRegE};
   },
 
 };

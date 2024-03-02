@@ -8,7 +8,7 @@ import { PlusIcon} from "@heroicons/vue/24/outline/index.js";
 import {useRoute} from "vue-router";
 import exportExcel from "@/components/function/exportExcel.js";
 import {ref, watch} from "vue";
-
+import html2canvas from "html2canvas";
 
 
 export default {
@@ -28,19 +28,18 @@ export default {
     watch(() => route.params.tab, (newTab) => {
       if (newTab == 'statistic') {
         getStatistic(route.params.id)
-        console.log("!2222222")
       }
     })
     const framework =ref()
     async function getStatistic(id) {
       const response = await AnswerRepository.statistic(id)
-      console.log(response.data.formAnswers)
-      console.log(framework.value)
        framework.value = response.data.formAnswers
-      console.log(framework.value)
 
     }
     async function updateForm() {
+      const home = document.querySelector('#home')
+      const canvas = await html2canvas(home)
+      storeForm.form.screenShot = canvas.toDataURL()
       await FormsRepository.updateForm(storeForm.form.formId,storeForm.form)
     }
     const createQuestion = () => {
@@ -61,6 +60,7 @@ export default {
       this.getStatistic(id)
     }
   },
+
 }
 </script>
 <template>

@@ -4,8 +4,9 @@ import {RepositoryFactory} from "@/api/RepositoryFactory.js";
 import { ref} from "vue";
 import {formStore} from "@/stores/form.js";
 import {FormClass} from "@/models/FormModel.js";
+import {TrashIcon} from "@heroicons/vue/24/outline";
 export default {
-  components: {Navbar},
+  components: {Navbar,TrashIcon},
   setup() {
     const FormsRepository = RepositoryFactory.get('forms')
     const listForm = ref(null);
@@ -20,7 +21,12 @@ export default {
     const showForm = (form) =>{
       return form.header.toLowerCase().includes(storeForm.search.toLowerCase())
     }
-    return {listForm, getAll, storeForm, createUrlForm,showForm}
+    async function deleteForm(formId) {
+      await FormsRepository.deleteForm(formId).then(response =>{
+          getAll()
+      })
+    }
+    return {listForm, getAll, storeForm, createUrlForm,showForm,deleteForm}
   },
   created() {
     this.getAll()
@@ -45,6 +51,8 @@ export default {
         {{ form.header }}
         </a>
         </router-link>
+          <trash-icon class="icon" @click="deleteForm(form.formId)"/>
+
       </div>
     </div>
   </div>

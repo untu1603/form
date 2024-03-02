@@ -6,6 +6,7 @@ import {RepositoryFactory} from "@/api/RepositoryFactory.js";
 import {FormClass, QuestionClass,} from "@/models/FormModel.js";
 import { PlusIcon} from "@heroicons/vue/24/outline/index.js";
 import {useRouter} from "vue-router";
+import html2canvas from "html2canvas";
 
 
 export default {
@@ -18,7 +19,10 @@ export default {
       const response = await FormsRepository.getForm(id)
       storeForm.form=response.data
     }
-     const saveForm=()=> {
+     async function saveForm() {
+         const home = document.querySelector('#home')
+         const canvas = await html2canvas(home)
+         storeForm.form.screenShot = canvas.toDataURL()
       FormsRepository.createForm(storeForm.form).then(
           response => {
             storeForm.form=response.data
@@ -34,6 +38,7 @@ export default {
     return { storeForm,getForm,saveForm,createQuestion}
   },
   created() {
+    this.storeForm.form = new FormClass("Header");
   },
 }
 </script>
