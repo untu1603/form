@@ -11,14 +11,14 @@
         ></b-form-select>
       </div>
     </div>
-    <b-form-group  label="Question:" v-if="question.type != 3">
+    <b-form-group  label="Answer:" v-if="question.type != 3">
       <div v-for="(choice,index) in question.choices" >
         <div class="d-inline-flex w-50 mt-2">
           <stop-icon class="icon"/>
         <b-form-input
           class="form-control-sm"
           placeholder="Option"
-          v-model="question.choices[index]"
+          v-model="question.choices[index].content"
           required
         ></b-form-input>
         <x-mark-icon  class="icon" @click="onDeleteChoice(index)"/>
@@ -26,8 +26,32 @@
       </div>
       <plus-icon @click="createChoice" class="icon"/>
     </b-form-group>
+    <b-form-group v-else >
+      <div>
+        <div class="d-inline-flex w-50 mt-2">
+          <input type="checkbox" v-model="isRegE">
+          <b-form-input :disabled = !isRegE
+              class="form-control-sm "
+              placeholder="Regex Expression"
+              v-model="question.regexExpression"
+              required
+          ></b-form-input>
+      </div>
+      </div>
+      <div>
+        <div class="d-inline-flex w-50 mt-2">
+          <input type="checkbox" v-model="isSize">
+          <label class="mx-2">Size</label>
+          <b-form-input :disabled = !isSize
+                        class="form-control-sm"
+                        type="number"
+                        v-model="question.size"
+                        required
+          ></b-form-input>
+        </div>
+      </div>
+    </b-form-group>
     <trash-icon @click="onDelete" class="icon"/>
-    <arrow-path-icon @click="onReset" class="icon"/>
   </b-form>
 </template>
 
@@ -35,8 +59,10 @@
 import { ref} from 'vue';
 import {formStore} from "@/stores/form.js";
 import { TrashIcon, ArrowPathIcon, XMarkIcon, StopIcon,PlusIcon} from '@heroicons/vue/24/outline';
+import {isRegExp} from "eslint-plugin-vue/lib/utils/regexp.js";
 
 export default {
+  methods: {isRegExp},
   props: {
     index: Number
   },
@@ -44,14 +70,15 @@ export default {
   setup(props) {
     const storeForm = formStore()
     const question = storeForm.form.questions[props.index]
-
+    const isRegE =ref(false)
+    const isSize =ref(false)
     const types = ref([
       { value: 1, text: 'Multiple choice' },
       { value: 2, text: 'Checkboxes' },
       { value: 3, text: 'Paragraph' },
     ]);
     const createChoice = () => {
-      question.choices.push('')
+      question.choices.push({id: question.choices.length,content: ''})
     };
     const onDelete = () => {
       storeForm.form.questions.splice(props.index,1)
@@ -61,7 +88,7 @@ export default {
     };
     const onReset = () => {
     };
-    return {storeForm, types, onDelete, onReset, question,createChoice,onDeleteChoice };
+    return {storeForm, types, onDelete, onReset, question,createChoice,onDeleteChoice ,isRegE,isSize};
   },
 
 };

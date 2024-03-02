@@ -5,34 +5,35 @@ import Navbar from "@/components/Navbar.vue";
 import {RepositoryFactory} from "@/api/RepositoryFactory.js";
 import {FormClass, QuestionClass,} from "@/models/FormModel.js";
 import { PlusIcon} from "@heroicons/vue/24/outline/index.js";
+import {useRouter} from "vue-router";
 
 
 export default {
   components: { Question, Navbar, PlusIcon},
   setup() {
     const storeForm = formStore()
+    const router = useRouter();
     const FormsRepository = RepositoryFactory.get('forms')
     async function getForm(id) {
       const response = await FormsRepository.getForm(id)
       storeForm.form=response.data
     }
-    async function saveForm() {
-      const response= await FormsRepository.createForm(storeForm.form)
-      storeForm.form=response.data
+     const saveForm=()=> {
+      FormsRepository.createForm(storeForm.form).then(
+          response => {
+            storeForm.form=response.data
+            router.push(`edit/${storeForm.form.formId}`)
+          }
+      )
+
     }
     const createQuestion = () => {
       storeForm.form.questions.push(new QuestionClass(1))
     }
-    const createUrlForm = (formId) =>{
-      return `edit/${formId}`
-    }
-    return {createUrlForm, storeForm,getForm,saveForm,createQuestion}
-  },
 
+    return { storeForm,getForm,saveForm,createQuestion}
+  },
   created() {
-      if (this.storeForm.form.formId == null) {
-        this.storeForm.form = new FormClass("header")
-      }
   },
 }
 </script>
@@ -50,9 +51,7 @@ export default {
     </div>
     <plus-icon @click="createQuestion" class="icon"/>
     <div class="d-flex flex-row-reverse">
-      <router-link :to=createUrlForm(storeForm.form.formId)>
       <b-button @click="saveForm" variant="danger" class="">Save</b-button>
-      </router-link>
     </div>
   </main>
   </div>
