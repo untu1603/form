@@ -35,20 +35,16 @@ public class FormController {
     @PostMapping("")
     public Form creat(@RequestBody Form form)
     {
-        log.info("dfsdaf"+form.toString());
         return formService.create(form);
     }
     @PutMapping("/{id}")
     public Form update(@PathVariable(value = "id") UUID id,@RequestBody Form form)
-    {
-        log.info("dfsdaf"+form.toString());
-        form.setFormId(id);
+    {   form.setFormId(id);
         return formService.update(form);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable(value = "id") UUID id)
     {
-
          formService.delete(id);
          return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
