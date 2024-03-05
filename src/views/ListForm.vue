@@ -46,7 +46,7 @@ export default {
     <div class="wrapper">
       <div class="card" v-for="form in listForm" v-show=showForm(form)>
         <router-link class="no-underline" :to=createUrlForm(form.formId) @click="storeForm.form=form">
-        <a>
+        <a class="text-truncate no-underline">
         <img v-bind:src="form.screenShot"/>
         {{ form.header }}
         </a>

@@ -58,14 +58,13 @@
 <script>
 import { ref} from 'vue';
 import {formStore} from "@/stores/form.js";
-import { TrashIcon, ArrowPathIcon, XMarkIcon, StopIcon,PlusIcon} from '@heroicons/vue/24/outline';
-import {isRegExp} from "eslint-plugin-vue/lib/utils/regexp.js";
+import { TrashIcon , XMarkIcon, StopIcon,PlusIcon} from '@heroicons/vue/24/outline';
 
 export default {
   props: {
     index: Number
   },
-  components: { TrashIcon, ArrowPathIcon ,XMarkIcon, StopIcon, PlusIcon},
+  components: { TrashIcon ,XMarkIcon, StopIcon, PlusIcon},
   setup(props) {
     const storeForm = formStore()
     const question = storeForm.form.questions[props.index]

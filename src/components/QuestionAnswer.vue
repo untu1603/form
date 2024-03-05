@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {computed, ref, watch, watchEffect} from 'vue';
+import { ref,} from 'vue';
 import {formStore} from "@/stores/form.js";
 import {answerStore} from "@/stores/answer.js";
 import {toRegExp} from "eslint-plugin-vue/lib/utils/regexp.js";
@@ -52,14 +52,14 @@ export default {
     async function validateR ()
     {
       if (question.regexExpression == null) {
-         validateRegex.value= true
+         validateRegex.value= false
       } else
         validateRegex.value=!toRegExp(question.regexExpression).test(text.value)
     }
     async function validateS ()
     {
       validateR()
-      if (question.size == null) {
+      if (question.size == null|| question.size == 0) {
          validateSize.value = false
       }
       else {
@@ -71,7 +71,7 @@ export default {
       validateR()
       validateS()
       console.log(toRegExp(question.regexExpression))
-      if (validateRegex.value|| validateSize.value) content.paragraph= text
+      if (!validateRegex.value && !validateSize.value) content.paragraph= text.value
     }
 
     return {answer ,storeForm,question, content,validateSize,validateRegex,errors,text,validateText};

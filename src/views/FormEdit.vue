@@ -34,6 +34,7 @@ export default {
     async function getStatistic(id) {
       const response = await AnswerRepository.statistic(id)
        framework.value = response.data.formAnswers
+        console.log(framework.value)
 
     }
     async function updateForm() {
