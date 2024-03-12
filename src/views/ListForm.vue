@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar.vue";
 import {RepositoryFactory} from "@/api/RepositoryFactory.js";
 import { ref} from "vue";
 import {formStore} from "@/stores/form.js";
-import {FormClass} from "@/models/FormModel.js";
 import {TrashIcon} from "@heroicons/vue/24/outline";
 export default {
   components: {Navbar,TrashIcon},

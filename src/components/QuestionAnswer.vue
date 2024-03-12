@@ -18,8 +18,6 @@
             <p v-if="validateRegex" class="text-danger">{{errors.regex}}</p>
             <p v-if="validateSize" class="text-danger">{{ errors.size }}</p>
       </div>
-
-
     </b-form-group>
 
   </b-form>
@@ -30,7 +28,6 @@ import { ref,} from 'vue';
 import {formStore} from "@/stores/form.js";
 import {answerStore} from "@/stores/answer.js";
 import {toRegExp} from "eslint-plugin-vue/lib/utils/regexp.js";
-import question from "@/components/Question.vue";
 export default {
   props: {
     index: Number
