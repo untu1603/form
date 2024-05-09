@@ -12,6 +12,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/answers")
 @RequiredArgsConstructor @Slf4j
+@CrossOrigin("*")
 public class AnswerController {
     private final AnswerService answerService;
     @PostMapping("")

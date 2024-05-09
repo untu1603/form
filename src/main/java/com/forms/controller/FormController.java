@@ -20,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController @Slf4j
 @RequestMapping("/forms")
+@CrossOrigin("*")
 public class FormController {
     private final FormService formService;
     @GetMapping("")
