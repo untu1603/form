@@ -1,0 +1,59 @@
+@import './base.css';
+div#home {
+    padding-top: 80px;
+    .card-create {
+        box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+        width: 124px;
+        height: 124px;
+        margin: 12px;
+        transition: .15s all ease-in-out;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .card {
+        box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+        max-width: 180px;
+        max-height: 260px;
+        margin: 12px;
+        transition: .15s all ease-in-out;
+        &:hover {
+            transform: scale(1.1);
+        }
+        a {
+            margin: 12px;
+            color: #000000;
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            align-items: center;
+            img {
+                height: 120px;
+                width: 120px;
+            }
+        }
+    }
+    .cardquest {
+        box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+        margin: 12px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 12px;
+        &:hover {
+            transform: scale(1.01);
+        }
+    }
+}
+.icon
+{
+    width: 25px;
+    height: 25px;
+}
+.icon:hover {
+    background-color: #a8a8a8;
+}
