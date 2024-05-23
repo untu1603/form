@@ -1,6 +1,4 @@
 # form_fe
-# form_be https://github.com/untu1603/form_be
-
 
 ## Project Setup
 
